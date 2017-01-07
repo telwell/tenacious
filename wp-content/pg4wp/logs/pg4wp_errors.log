@@ -488,3 +488,19 @@ DELETE FROM wp_options WHERE option_name = 'avada_theme_options';INSERT INTO wp_
 LINE 1: ...th";s:1:"0";s:18:"carousel_nav_color";s:15:"rgba('0',0,0,0.6...
                                                              ^
 ---------------------
+[1483828700.99] Error running :
+SELECT tt.term_id, t.*, count(*) as term_tt_count FROM wp_term_taxonomy tt
+		 LEFT JOIN wp_terms t ON t.term_id = tt.term_id
+		 GROUP BY t.term_id
+		 HAVING term_tt_count > 1
+		 LIMIT 10
+---- converted to ----
+SELECT tt.term_id, t.*, count(*) as term_tt_count FROM wp_term_taxonomy tt
+		 LEFT JOIN wp_terms t ON t.term_id = tt.term_id
+		 GROUP BY t.term_id
+		 HAVING term_tt_count > 1
+		 LIMIT 10
+----> ERROR:  column "term_tt_count" does not exist
+LINE 4:    HAVING term_tt_count > 1
+                  ^
+---------------------
